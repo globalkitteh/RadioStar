@@ -7,6 +7,8 @@ import android.widget.EditText;
 public class MainActivity extends AppCompatActivity {
 
     private EditText vidTitle;
+    private static final String API_KEY = "AIzaSyDd30ot3W9T-DJGYlypX75kUruWuNqzCfI";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

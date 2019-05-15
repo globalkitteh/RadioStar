@@ -14,9 +14,12 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <style name="BlackNoBarsTheme" parent="android:Theme.Black.NoTitleBar.Fullscreen"/>
-  <style name="BlackNoTitleBarTheme" parent="android:Theme.Black.NoTitleBar"/>
+    <item type="id" name="player_view"/>
+
+    <string name="minVersion">minVersion</string>
+    <string name="isLaunchableActivity">isLaunchableActivity</string>
+    <string name="loggingTag">YoutubeAPIDemos</string>
 
 </resources>
