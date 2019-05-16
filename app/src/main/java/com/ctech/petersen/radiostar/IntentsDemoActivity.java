@@ -27,9 +27,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.examples.youtubeapidemo.adapter.DemoArrayAdapter;
-import com.examples.youtubeapidemo.adapter.DemoListViewItem;
-
 import java.util.ArrayList;
 import java.util.List;
 

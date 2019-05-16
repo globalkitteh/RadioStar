@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ctech.petersen.radiostar.adapter;
+package com.ctech.petersen.radiostar;
 
 /**
  * A single list view item for use with {@link DemoArrayAdapter}.

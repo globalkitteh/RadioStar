@@ -31,9 +31,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.examples.youtubeapidemo.adapter.DemoArrayAdapter;
-import com.examples.youtubeapidemo.adapter.DemoListViewItem;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,7 +78,7 @@ public class YouTubeAPIDemoActivity extends Activity implements OnItemClickListe
     listView.setOnItemClickListener(this);
 
     TextView disabledText = (TextView) findViewById(R.id.some_demos_disabled_text);
-    disabledText.setText(getString(R.string.some_demos_disabled, android.os.Build.VERSION.SDK_INT));
+    //disabledText.setText(getString(R.string.some_demos_disabled, android.os.Build.VERSION.SDK_INT));
 
     if (adapter.anyDisabled()) {
       disabledText.setVisibility(View.VISIBLE);

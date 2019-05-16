@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ctech.petersen.radiostar.ui;
+package com.ctech.petersen.radiostar;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

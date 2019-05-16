@@ -39,9 +39,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.examples.youtubeapidemo.ui.FlippingView;
-import com.examples.youtubeapidemo.ui.ImageWallView;
-
 /**
  * A demo application aimed at showing the capabilities of the YouTube Player API.  It shows a video
  * wall of flipping YouTube thumbnails.  Every 5 flips, one of the thumbnails will be replaced with

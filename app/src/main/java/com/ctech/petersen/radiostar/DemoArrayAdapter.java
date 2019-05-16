@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ctech.petersen.radiostar.adapter;
+package com.ctech.petersen.radiostar;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -23,8 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-import com.examples.youtubeapidemo.R;
 
 import java.util.List;
 
