@@ -28,29 +28,29 @@ import android.widget.Toast;
  * initialization, but can be corrected through user action.
  */
 public abstract class YouTubeFailureRecoveryActivity extends YouTubeBaseActivity implements
-    YouTubePlayer.OnInitializedListener {
+        YouTubePlayer.OnInitializedListener {
 
-  private static final int RECOVERY_DIALOG_REQUEST = 1;
+    private static final int RECOVERY_DIALOG_REQUEST = 1;
 
-  @Override
-  public void onInitializationFailure(YouTubePlayer.Provider provider,
-      YouTubeInitializationResult errorReason) {
-    if (errorReason.isUserRecoverableError()) {
-      errorReason.getErrorDialog(this, RECOVERY_DIALOG_REQUEST).show();
-    } else {
-      String errorMessage = String.format(getString(R.string.error_player), errorReason.toString());
-      Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider,
+                                        YouTubeInitializationResult errorReason) {
+        if (errorReason.isUserRecoverableError()) {
+            errorReason.getErrorDialog(this, RECOVERY_DIALOG_REQUEST).show();
+        } else {
+            String errorMessage = String.format(getString(R.string.error_player), errorReason.toString());
+            Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
+        }
     }
-  }
 
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    if (requestCode == RECOVERY_DIALOG_REQUEST) {
-      // Retry initialization if user performed a recovery action
-      getYouTubePlayerProvider().initialize(DeveloperKey.DEVELOPER_KEY, this);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RECOVERY_DIALOG_REQUEST) {
+            // Retry initialization if user performed a recovery action
+            getYouTubePlayerProvider().initialize(DeveloperKey.DEVELOPER_KEY, this);
+        }
     }
-  }
 
-  protected abstract YouTubePlayer.Provider getYouTubePlayerProvider();
+    protected abstract YouTubePlayer.Provider getYouTubePlayerProvider();
 
 }

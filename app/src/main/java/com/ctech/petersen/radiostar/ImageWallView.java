@@ -34,133 +34,133 @@ import java.util.Random;
  */
 public class ImageWallView extends ViewGroup {
 
-  private final Context context;
-  private final Random random;
+    private final Context context;
+    private final Random random;
 
-  private final int imageHeight;
-  private final int imageWidth;
-  private final int interImagePadding;
+    private final int imageHeight;
+    private final int imageWidth;
+    private final int interImagePadding;
 
-  private ImageView[] images;
-  private List<Integer> unInitializedImages;
+    private ImageView[] images;
+    private List<Integer> unInitializedImages;
 
-  private int numberOfColumns;
-  private int numberOfRows;
+    private int numberOfColumns;
+    private int numberOfRows;
 
-  public ImageWallView(Context context, int imageWidth, int imageHeight, int interImagePadding) {
-    super(context);
-    this.context = context;
-    random = new Random();
+    public ImageWallView(Context context, int imageWidth, int imageHeight, int interImagePadding) {
+        super(context);
+        this.context = context;
+        random = new Random();
 
-    this.imageWidth = imageWidth;
-    this.imageHeight = imageHeight;
-    this.interImagePadding = interImagePadding;
-    this.images = new ImageView[0];
-    this.unInitializedImages = new ArrayList<Integer>();
-  }
-
-  @Override
-  protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight) {
-    // create enough columns to fill view's width, plus an extra column at either side to allow
-    // images to have diagonal offset across the screen.
-    numberOfColumns = width / (imageWidth + interImagePadding) + 2;
-    // create enough rows to fill the view's height (adding an extra row at bottom if necessary).
-    numberOfRows = height / (imageHeight + interImagePadding);
-    numberOfRows += (height % (imageHeight + interImagePadding) == 0) ? 0 : 1;
-
-    if ((numberOfRows <= 0) || (numberOfColumns <= 0)) {
-      throw new IllegalStateException("Error creating an ImageWallView with " + numberOfRows
-          + " rows and " + numberOfColumns + " columns. Both values must be greater than zero.");
+        this.imageWidth = imageWidth;
+        this.imageHeight = imageHeight;
+        this.interImagePadding = interImagePadding;
+        this.images = new ImageView[0];
+        this.unInitializedImages = new ArrayList<Integer>();
     }
 
-    if (images.length < (numberOfColumns * numberOfRows)) {
-      images = Arrays.copyOf(images, numberOfColumns * numberOfRows);
-    }
+    @Override
+    protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight) {
+        // create enough columns to fill view's width, plus an extra column at either side to allow
+        // images to have diagonal offset across the screen.
+        numberOfColumns = width / (imageWidth + interImagePadding) + 2;
+        // create enough rows to fill the view's height (adding an extra row at bottom if necessary).
+        numberOfRows = height / (imageHeight + interImagePadding);
+        numberOfRows += (height % (imageHeight + interImagePadding) == 0) ? 0 : 1;
 
-    removeAllViews();
-    for (int col = 0; col < numberOfColumns; col++) {
-      for (int row = 0; row < numberOfRows; row++) {
-        int elementIdx = getElementIdx(col, row);
-        if (images[elementIdx] == null) {
-          ImageView thumbnail = new ImageView(context);
-          thumbnail.setLayoutParams(new LayoutParams(imageWidth, imageHeight));
-          images[elementIdx] = thumbnail;
-          unInitializedImages.add(elementIdx);
+        if ((numberOfRows <= 0) || (numberOfColumns <= 0)) {
+            throw new IllegalStateException("Error creating an ImageWallView with " + numberOfRows
+                    + " rows and " + numberOfColumns + " columns. Both values must be greater than zero.");
         }
-        addView(images[elementIdx]);
-      }
+
+        if (images.length < (numberOfColumns * numberOfRows)) {
+            images = Arrays.copyOf(images, numberOfColumns * numberOfRows);
+        }
+
+        removeAllViews();
+        for (int col = 0; col < numberOfColumns; col++) {
+            for (int row = 0; row < numberOfRows; row++) {
+                int elementIdx = getElementIdx(col, row);
+                if (images[elementIdx] == null) {
+                    ImageView thumbnail = new ImageView(context);
+                    thumbnail.setLayoutParams(new LayoutParams(imageWidth, imageHeight));
+                    images[elementIdx] = thumbnail;
+                    unInitializedImages.add(elementIdx);
+                }
+                addView(images[elementIdx]);
+            }
+        }
     }
-  }
 
-  @Override
-  protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-    DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-    int width = getDefaultSize(displayMetrics.widthPixels, widthMeasureSpec);
-    int height = getDefaultSize(displayMetrics.heightPixels, heightMeasureSpec);
-    setMeasuredDimension(width, height);
-  }
-
-  @Override
-  protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-    for (int col = 0; col < numberOfColumns; col++) {
-      for (int row = 0; row < numberOfRows; row++) {
-        int x = (col - 1) * (imageWidth + interImagePadding) + (row * (imageWidth / numberOfRows));
-        int y = row * (imageHeight + interImagePadding);
-        images[col * numberOfRows + row].layout(x, y, x + imageWidth, y + imageHeight);
-      }
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        int width = getDefaultSize(displayMetrics.widthPixels, widthMeasureSpec);
+        int height = getDefaultSize(displayMetrics.heightPixels, heightMeasureSpec);
+        setMeasuredDimension(width, height);
     }
-  }
 
-  public int getXPosition(int col, int row) {
-    return images[getElementIdx(col, row)].getLeft();
-  }
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        for (int col = 0; col < numberOfColumns; col++) {
+            for (int row = 0; row < numberOfRows; row++) {
+                int x = (col - 1) * (imageWidth + interImagePadding) + (row * (imageWidth / numberOfRows));
+                int y = row * (imageHeight + interImagePadding);
+                images[col * numberOfRows + row].layout(x, y, x + imageWidth, y + imageHeight);
+            }
+        }
+    }
 
-  public int getYPosition(int col, int row) {
-    return images[getElementIdx(col, row)].getTop();
-  }
+    public int getXPosition(int col, int row) {
+        return images[getElementIdx(col, row)].getLeft();
+    }
 
-  private int getElementIdx(int col, int row) {
-    return (col * numberOfRows) + row;
-  }
+    public int getYPosition(int col, int row) {
+        return images[getElementIdx(col, row)].getTop();
+    }
 
-  public void hideImage(int col, int row) {
-    images[getElementIdx(col, row)].setVisibility(View.INVISIBLE);
-  }
+    private int getElementIdx(int col, int row) {
+        return (col * numberOfRows) + row;
+    }
 
-  public void showImage(int col, int row) {
-    images[getElementIdx(col, row)].setVisibility(View.VISIBLE);
-  }
+    public void hideImage(int col, int row) {
+        images[getElementIdx(col, row)].setVisibility(View.INVISIBLE);
+    }
 
-  public void setImageDrawable(int col, int row, Drawable drawable) {
-    int elementIdx = getElementIdx(col, row);
-    // manually boxing elementIdx to avoid calling List.remove(int position) method overload
-    unInitializedImages.remove(new Integer(elementIdx));
-    images[elementIdx].setImageDrawable(drawable);
-  }
+    public void showImage(int col, int row) {
+        images[getElementIdx(col, row)].setVisibility(View.VISIBLE);
+    }
 
-  public Drawable getImageDrawable(int col, int row) {
-    int elementIdx = getElementIdx(col, row);
-    return images[elementIdx].getDrawable();
-  }
+    public void setImageDrawable(int col, int row, Drawable drawable) {
+        int elementIdx = getElementIdx(col, row);
+        // manually boxing elementIdx to avoid calling List.remove(int position) method overload
+        unInitializedImages.remove(new Integer(elementIdx));
+        images[elementIdx].setImageDrawable(drawable);
+    }
 
-  public Pair<Integer, Integer> getNextLoadTarget() {
-    int nextElement;
-    do {
-      if (unInitializedImages.isEmpty()) {
-        // Don't choose the first or last columns (since they are partly hidden)
-        nextElement = random.nextInt((numberOfColumns - 2) * numberOfRows) + numberOfRows;
-      } else {
-        nextElement = unInitializedImages.get(random.nextInt(unInitializedImages.size()));
-      }
-    } while (images[nextElement].getVisibility() != View.VISIBLE);
+    public Drawable getImageDrawable(int col, int row) {
+        int elementIdx = getElementIdx(col, row);
+        return images[elementIdx].getDrawable();
+    }
 
-    int col = nextElement / numberOfRows;
-    int row = nextElement % numberOfRows;
-    return new Pair<Integer, Integer>(col, row);
-  }
+    public Pair<Integer, Integer> getNextLoadTarget() {
+        int nextElement;
+        do {
+            if (unInitializedImages.isEmpty()) {
+                // Don't choose the first or last columns (since they are partly hidden)
+                nextElement = random.nextInt((numberOfColumns - 2) * numberOfRows) + numberOfRows;
+            } else {
+                nextElement = unInitializedImages.get(random.nextInt(unInitializedImages.size()));
+            }
+        } while (images[nextElement].getVisibility() != View.VISIBLE);
 
-  public boolean allImagesLoaded() {
-    return unInitializedImages.isEmpty();
-  }
+        int col = nextElement / numberOfRows;
+        int row = nextElement % numberOfRows;
+        return new Pair<Integer, Integer>(col, row);
+    }
+
+    public boolean allImagesLoaded() {
+        return unInitializedImages.isEmpty();
+    }
 
 }

@@ -21,10 +21,10 @@ package com.ctech.petersen.radiostar;
  */
 public interface DemoListViewItem {
 
-  public String getTitle();
+    public String getTitle();
 
-  public boolean isEnabled();
+    public boolean isEnabled();
 
-  public String getDisabledText();
+    public String getDisabledText();
 
 }

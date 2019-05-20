@@ -5,9 +5,6 @@ public class Search {
     private String title;
 
 
-
-
-
     public String getTitle() {
         return title;
     }

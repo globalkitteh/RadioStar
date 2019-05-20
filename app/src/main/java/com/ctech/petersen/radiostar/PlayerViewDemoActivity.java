@@ -30,26 +30,26 @@ import android.os.Bundle;
  */
 public class PlayerViewDemoActivity extends YouTubeFailureRecoveryActivity {
 
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.playerview_demo);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.playerview_demo);
 
-    YouTubePlayerView youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
-    youTubeView.initialize(DeveloperKey.DEVELOPER_KEY, this);
-  }
-
-  @Override
-  public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player,
-      boolean wasRestored) {
-    if (!wasRestored) {
-      player.cueVideo("wKJ9KzGQq0w");
+        YouTubePlayerView youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
+        youTubeView.initialize(DeveloperKey.DEVELOPER_KEY, this);
     }
-  }
 
-  @Override
-  protected YouTubePlayer.Provider getYouTubePlayerProvider() {
-    return (YouTubePlayerView) findViewById(R.id.youtube_view);
-  }
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player,
+                                        boolean wasRestored) {
+        if (!wasRestored) {
+            player.cueVideo("wKJ9KzGQq0w");
+        }
+    }
+
+    @Override
+    protected YouTubePlayer.Provider getYouTubePlayerProvider() {
+        return (YouTubePlayerView) findViewById(R.id.youtube_view);
+    }
 
 }
