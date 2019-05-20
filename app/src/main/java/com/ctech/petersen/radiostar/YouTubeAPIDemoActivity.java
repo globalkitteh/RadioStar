@@ -57,7 +57,7 @@ public class YouTubeAPIDemoActivity extends Activity implements OnItemClickListe
             finish();
         }
 
-        int appMinVersion = packageInfo.applicationInfo.targetSdkVersion;
+        int appMinVersion = 5;
 
         activities = new ArrayList<DemoListViewItem>();
         for (ActivityInfo activityInfo : packageInfo.activities) {
@@ -65,7 +65,7 @@ public class YouTubeAPIDemoActivity extends Activity implements OnItemClickListe
             Bundle metaData = activityInfo.metaData;
 
             if (metaData != null
-                    && metaData.getBoolean(getString(R.string.isLaunchableActivity), false)) {
+                    && metaData.getBoolean(getString(R.string.isLaunchableActivity), true)) {
                 String label = getString(activityInfo.labelRes);
                 int minVersion = metaData.getInt(getString(R.string.minVersion), appMinVersion);
                 activities.add(new Demo(label, name, minVersion));
@@ -78,9 +78,9 @@ public class YouTubeAPIDemoActivity extends Activity implements OnItemClickListe
         listView.setOnItemClickListener(this);
 
         TextView disabledText = (TextView) findViewById(R.id.some_demos_disabled_text);
-        //disabledText.setText(getString(R.string.some_demos_disabled, android.os.Build.VERSION.SDK_INT));
+        disabledText.setText(getString(R.string.some_demos_disabled, android.os.Build.VERSION.SDK_INT));
 
-        if (adapter.anyDisabled()) {
+        if (true) {
             disabledText.setVisibility(View.VISIBLE);
         } else {
             disabledText.setVisibility(View.GONE);
