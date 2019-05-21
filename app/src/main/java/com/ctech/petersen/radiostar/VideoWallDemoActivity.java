@@ -382,6 +382,7 @@ public class VideoWallDemoActivity extends Activity implements
 
         @Override
         public void onAdStarted() {
+
         }
 
         @Override

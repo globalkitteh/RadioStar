@@ -30,7 +30,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import com.ctech.petersen.radiostar.DemoListViewItem;
+import com.ctech.petersen.radiostar.DemoArrayAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
