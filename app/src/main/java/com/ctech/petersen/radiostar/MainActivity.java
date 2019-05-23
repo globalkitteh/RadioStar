@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
-public class MainActivity extends YouTubeFailureRecoveryActivity implements
+/*public class MainActivity extends YouTubeFailureRecoveryActivity implements
         View.OnClickListener,
         TextView.OnEditorActionListener,
         CompoundButton.OnCheckedChangeListener,
@@ -139,5 +139,5 @@ public class MainActivity extends YouTubeFailureRecoveryActivity implements
         private YouTubePlayerView youTubePlayerView;
         private YouTubePlayer player;
     }
-}
+}*/
 
